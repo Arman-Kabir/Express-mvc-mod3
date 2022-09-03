@@ -6,12 +6,19 @@ const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const dbConnect = require('./utils/dbConnect');
 
 const toolsRoutes = require("./routes/v1/tools.route.js");
+const viewCount = require('./middleware/viewCount');
+const { default: rateLimit } = require('express-rate-limit');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
+
+// app.use(viewCount);
+// Apply the rate limiting middleware to all requests
+// app.use(limiter);
+
 // dbConnect();
 
 // Tools route
