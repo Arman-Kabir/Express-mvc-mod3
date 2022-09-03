@@ -1,5 +1,5 @@
 
-const tools = [
+let tools = [
     { id: 1, name: "Hammer1" },
     { id: 2, name: "Hammer2" },
     { id: 3, name: "Hammer3" }
@@ -22,7 +22,7 @@ module.exports.saveATool = (req, res, next) => {
     console.log(req.query);
     tools.push(req.body);
     res.send(tools);
-    
+
 }
 
 module.exports.getToolDetail = (req, res, next) => {
@@ -32,4 +32,25 @@ module.exports.getToolDetail = (req, res, next) => {
     const foundTool = tools.find(tool => tool.id === Number(id));
     res.send(foundTool);
 
+}
+
+module.exports.updateTool = (req, res) => {
+    // const newData = req.body;
+    const { id } = req.params;
+    // const filter = { _id: id };
+
+    const newData = tools.find(tool=>tool.id ===Number(id));
+
+    newData.id = id;
+    newData.name = req.body.name;
+    
+    res.send(newData);
+}
+
+module.exports.deleteTool = (req,res)=>{
+    const {id} = req.params;
+    const filter = {_id:id};
+
+    tools = tools.filter(tool=>tool.id !== Number(id));
+    res.send(tools);
 }

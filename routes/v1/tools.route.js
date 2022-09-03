@@ -52,6 +52,21 @@ router
     .post(toolsControllers.saveATool);
 
 
-router.route("/:id").get(viewCount,limiter, toolsControllers.getToolDetail);
+router.route("/:id").get(viewCount,limiter, toolsControllers.getToolDetail)
+.patch(toolsControllers.updateTool)
+.delete(toolsControllers.deleteTool);
 
 module.exports = router;
+
+let tool = {
+    id:1,
+    name:"hammer"
+}
+
+const newTool = {name:"test"};
+
+// PUT
+tool= {name:"test"};
+
+// PATCH
+tool = {id:1,name:"test"};
